@@ -10,7 +10,7 @@ public class Product
     public string Name { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     public decimal Price { get; set; }
-    public Uri ImageUrl { get; set; } = null!;
+    public String ImageUrl { get; set; } = null!;
 
     public double Rating { get; set; }
 

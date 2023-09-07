@@ -1,4 +1,6 @@
-﻿using kmakai.MVC.Ecommerce.Models;
+﻿using kmakai.MVC.Ecommerce.Data;
+using kmakai.MVC.Ecommerce.Models;
+using kmakai.MVC.Ecommerce.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -6,16 +8,16 @@ namespace kmakai.MVC.Ecommerce.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IProductRepository productRepository;
+        public HomeController(IProductRepository productRepo)
         {
-            _logger = logger;
+            productRepository = productRepo;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var products = await productRepository.GetProductsAsync();
+            return View(products);
         }
 
         public IActionResult Privacy()

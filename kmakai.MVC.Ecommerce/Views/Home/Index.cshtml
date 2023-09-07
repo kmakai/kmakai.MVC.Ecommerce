@@ -1,8 +1,23 @@
-﻿@{
+﻿@model IEnumerable<kmakai.MVC.Ecommerce.Models.Product>
+
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="d-grid gap-2">
+    @foreach (var product in Model)
+    {
+        <div class="card" style="width: 18rem;">
+            <img src="@product.ImageUrl" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">@product.Name</h5>
+                <h6 class="card-subtitle mb-2 text-muted">$@product.Price Rating: @product.Rating</h6>
+
+                <p class="card-text">@product.Description</p>
+                <a href="#" class="btn btn-primary">Add to Cart</a>
+            </div>
+        </div>
+    }
+
 </div>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using kmakai.MVC.Ecommerce.Models;
+using System.Data;
 
 namespace kmakai.MVC.Ecommerce.Data;
 
@@ -37,5 +38,6 @@ public class EcommerceContext : IdentityDbContext<AppUser>
             .WithMany(u => u.Orders)
             .HasForeignKey(o => o.AppUserId);
     }
+   
 }
 
