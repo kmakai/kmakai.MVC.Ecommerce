@@ -15,6 +15,7 @@ builder.Services.AddDbContext<EcommerceContext>(options =>
 builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<EcommerceContext>().AddDefaultTokenProviders();
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 var app = builder.Build();
 

@@ -44,7 +44,7 @@ public class Seeder
 
         var categories = context.Categories;
 
-        foreach (var product in products)
+        foreach (var product in products!)
         {
             context.Products.Add(new Product
             {
@@ -53,7 +53,7 @@ public class Seeder
                 Price = (decimal)product.price,
                 ImageUrl = product.image,
                 Rating = product.rating.rate,
-                CategoryId = categories.FirstOrDefault(c => c.Name == product.category).CategoryId
+                CategoryId = categories!.FirstOrDefault(c => c.Name == product.category)!.CategoryId
             });
         }
 
@@ -71,9 +71,9 @@ public class Seeder
 
         var categories = JsonConvert.DeserializeObject<List<string>>(responseString);
 
-        foreach (var category in categories)
+        foreach (var category in categories!)
         {
-           context.Categories.Add(new Category { Name = category });
+            context.Categories.Add(new Category { Name = category });
         }
 
         await context.SaveChangesAsync();
@@ -90,22 +90,22 @@ public class JsonProductObject
     public int id { get; set; }
 
     [JsonPropertyName("title")]
-    public string title { get; set; }
+    public string title { get; set; } = string.Empty;
 
     [JsonPropertyName("price")]
     public double price { get; set; }
 
     [JsonPropertyName("description")]
-    public string description { get; set; }
+    public string description { get; set; } = string.Empty;
 
     [JsonPropertyName("category")]
-    public string category { get; set; }
+    public string category { get; set; } = string.Empty;
 
     [JsonPropertyName("image")]
-    public string image { get; set; }
+    public string image { get; set; } = string.Empty;
 
     [JsonPropertyName("rating")]
-    public JsonRatingObject rating { get; set; }
+    public JsonRatingObject rating { get; set; } = new JsonRatingObject();
 }
 
 public class JsonRatingObject

@@ -1,0 +1,16 @@
+﻿@model Product
+
+@{
+    ViewBag.Title = "Product";
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>@Model.Name</h1>
+            <p>@Model.Description</p>
+            <p>@Model.Price</p>
+            <p>@Model.Category.Name</p>
+        </div>
+    </div>

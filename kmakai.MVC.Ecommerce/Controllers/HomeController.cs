@@ -8,15 +8,17 @@ namespace kmakai.MVC.Ecommerce.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IProductRepository productRepository;
+        private readonly IProductRepository _productRepository;
         public HomeController(IProductRepository productRepo)
         {
-            productRepository = productRepo;
+            _productRepository = productRepo;
         }
 
         public async Task<IActionResult> Index()
         {
-            var products = await productRepository.GetProductsAsync();
+            var products = await _productRepository.GetProductsAsync();
+            products = products.Where(p => p.Rating > 4.5);
+           
             return View(products);
         }
 
