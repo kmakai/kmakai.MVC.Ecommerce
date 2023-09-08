@@ -1,4 +1,7 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿const testButton = document.querySelector('.test-btn');
 
-// Write your JavaScript code.
+testButton.addEventListener('click', async () => {
+    const response = await fetch('order/create');
+    const data = await response.json();
+    console.log(data);
+});

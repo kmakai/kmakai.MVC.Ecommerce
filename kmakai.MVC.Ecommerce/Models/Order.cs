@@ -8,7 +8,7 @@ public class Order
     [Key]
     public int OrderId { get; set; }
 
-    public DateTime OrderPlaced { get; set; }
+    public DateTime OrderDate { get; set; }
 
     public bool CheckoutComplete { get; set; }
 

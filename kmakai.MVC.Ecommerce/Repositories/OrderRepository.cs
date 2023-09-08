@@ -24,7 +24,7 @@ namespace kmakai.MVC.Ecommerce.Repositories
 
             var newOrder = await connection.QueryFirstOrDefaultAsync<Order>("SELECT * FROM Orders WHERE OrderId = @Id", new { Id = id });
 
-            return order;
+            return newOrder;
         }
 
         public async void AddOrderItem(OrderItem item)
