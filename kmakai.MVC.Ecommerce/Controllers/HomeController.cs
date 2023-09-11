@@ -1,6 +1,7 @@
 ﻿using kmakai.MVC.Ecommerce.Data;
 using kmakai.MVC.Ecommerce.Models;
 using kmakai.MVC.Ecommerce.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -22,6 +23,7 @@ namespace kmakai.MVC.Ecommerce.Controllers
             return View(products);
         }
 
+        [Authorize]
         public IActionResult Privacy()
         {
             return View();

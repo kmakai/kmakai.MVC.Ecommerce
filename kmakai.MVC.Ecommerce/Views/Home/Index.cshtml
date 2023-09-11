@@ -1,5 +1,8 @@
 ﻿@model IEnumerable<kmakai.MVC.Ecommerce.Models.Product>
 
+<div>
+    hello you are logged in as @User?.Identity?.Name
+</div>
 
 @{
     ViewData["Title"] = "Home Page";
@@ -51,7 +54,12 @@
                         @Html.DisplayFor(modelItem => Product.Category.Name)
                     </td>
                     <td>
-                        <button class="btn btn-success">Add</button>
+                        <form class="add-product-form">
+                            <input type="hidden" name="productId" value="@Product.ProductId" />
+                            <input type="hidden" name="productName" value="@Product.Name" />
+                            <input type="hidden" name="productPrice" value="@Product.Price" />
+                            <button type="submit" class="btn btn-success" @* id="add-to-cart-btn" data-productId="@Product.ProductId" data-productName="@Product.Name" *@>Add</button>
+                        </form>
                     </td>
                 </tr>
             }

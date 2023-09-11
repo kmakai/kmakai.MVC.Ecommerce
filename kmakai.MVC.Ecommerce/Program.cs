@@ -13,6 +13,7 @@ builder.Services.AddDbContext<EcommerceContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<EcommerceContext>().AddDefaultTokenProviders();
+builder.Services.ConfigureApplicationCookie(opts => opts.LoginPath = "/user/Login");
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();

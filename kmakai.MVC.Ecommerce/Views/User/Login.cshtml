@@ -1,0 +1,18 @@
+﻿@model LoginModel
+
+<div class="row col-xl-6">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <form asp-action="Login" method="post">
+        <h4 class="form-label">Log In</h4>
+        <div class="form-floating mb-4">
+            <input asp-for="Email" class="form-control" />
+            <label asp-for="Email"></label>
+        </div>
+        <div class="form-floating mb-4">
+            <input asp-for="Password" class="form-control" />
+            <label asp-for="Password"></label>
+        </div>
+        <button class="btn btn-primary" type="submit">Log In</button>
+    </form>
+</div>
