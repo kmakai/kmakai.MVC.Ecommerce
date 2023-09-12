@@ -252,8 +252,11 @@ namespace kmakai.MVC.Ecommerce.Migrations
                     b.Property<bool>("CheckoutComplete")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("OrderPlaced")
+                    b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Total")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("OrderId");
 

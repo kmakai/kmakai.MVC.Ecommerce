@@ -10,6 +10,8 @@ public class Order
 
     public DateTime OrderDate { get; set; }
 
+    public decimal Total { get; set; }
+
     public bool CheckoutComplete { get; set; }
 
     public ICollection<OrderItem> OrderItems { get; set; } = null!;

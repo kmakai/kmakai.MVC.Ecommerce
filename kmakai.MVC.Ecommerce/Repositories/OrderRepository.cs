@@ -18,7 +18,7 @@ namespace kmakai.MVC.Ecommerce.Repositories
         {
             using IDbConnection connection = new SqlConnection(_configuration.GetConnectionString("DefaultConnection"));
 
-            var sql = @"INSERT INTO Orders (OrderDate, CheckoutComplete, AppUserId) VALUES (@OrderDate, @CheckoutComplete, @AppUserId); SELECT CAST(SCOPE_IDENTITY() as int)";
+            var sql = @"INSERT INTO Orders (OrderDate, CheckoutComplete, AppUserId, Total) VALUES (@OrderDate, @CheckoutComplete, @AppUserId, @Total); SELECT CAST(SCOPE_IDENTITY() as int)";
 
             var id = connection.QuerySingle<int>(sql, order);
 
@@ -32,14 +32,9 @@ namespace kmakai.MVC.Ecommerce.Repositories
             using IDbConnection connection = new SqlConnection(_configuration.GetConnectionString("DefaultConnection"));
 
 
-            var sql = @"Select * FROM Orders where OrderId = @Id";
+            var sql = @"INSERT INTO OrderItems (Quantity, Price, ProductId, OrderId) VALUES (@Quantity, @Price, @ProductId, @OrderId)";
 
-            var order = await connection.QueryFirstOrDefaultAsync<Order>(sql, new { Id = item.OrderId });
-
-
-            Console.WriteLine(order);
-
-
+            await connection.ExecuteAsync(sql, item);
 
         }
     }

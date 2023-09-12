@@ -45,11 +45,45 @@ public class OrderController : Controller
 
     [Route("order/checkout")]
     [HttpPost]
-    public IActionResult CheckoutOrder([FromBody] List<CartItem> items)
+    public async Task<IActionResult> CheckoutOrder([FromBody] List<CartItem> items)
     {
         foreach (var item in items) Console.WriteLine(item.name);
+        var subTotal = items.Sum(x => x.price * x.quantity);
+        var tax = subTotal * (decimal)0.08;
 
-        return Json(items);
+        List<OrderItem> orderItems = new List<OrderItem>();
+        var order = new Order
+        {
+            OrderDate = DateTime.Now,
+            CheckoutComplete = true,
+            Total = subTotal + tax,
+            AppUserId = User.FindFirstValue(ClaimTypes.NameIdentifier)
+        };
+
+        var createdOrder = await _orderRepository.CreateOrder(order);
+
+        foreach(var item in items)
+        {
+            var orderItem = new OrderItem
+            {
+                ProductId = item.productId,
+                Quantity = item.quantity,
+                Price = item.price,
+                OrderId = createdOrder.OrderId,
+           
+            };
+
+            orderItems.Add(orderItem);
+            _orderRepository.AddOrderItem(orderItem);
+        }
+
+
+        return new JsonResult(new
+        {
+            products = orderItems,
+            total = subTotal + tax,
+            user = User.FindFirstValue(ClaimTypes.NameIdentifier)
+        });
 
     }
 

@@ -12,8 +12,8 @@ using kmakai.MVC.Ecommerce.Data;
 namespace kmakai.MVC.Ecommerce.Migrations
 {
     [DbContext(typeof(EcommerceContext))]
-    [Migration("20230906224358_Initial")]
-    partial class Initial
+    [Migration("20230912191805_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -255,8 +255,11 @@ namespace kmakai.MVC.Ecommerce.Migrations
                     b.Property<bool>("CheckoutComplete")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("OrderPlaced")
+                    b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Total")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("OrderId");
 
