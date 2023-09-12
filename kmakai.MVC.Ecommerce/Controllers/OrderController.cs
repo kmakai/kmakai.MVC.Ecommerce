@@ -34,6 +34,25 @@ public class OrderController : Controller
         return Json(createdOrder);
     }
 
+    [Route("order/checkout")]
+    [HttpGet]
+    public IActionResult CheckoutOrder()
+    {
+        return View();
+    }
+
+
+
+    [Route("order/checkout")]
+    [HttpPost]
+    public IActionResult CheckoutOrder([FromBody] List<CartItem> items)
+    {
+        foreach (var item in items) Console.WriteLine(item.name);
+
+        return Json(items);
+
+    }
+
 }
 
 
