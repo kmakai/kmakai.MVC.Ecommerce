@@ -10,10 +10,18 @@
             <label asp-for="Email"></label>
         </div>
         <div class="form-floating mb-4">
-            <input asp-for="Password" class="form-control" />
+            <input asp-for="Password" class="form-control" type="password" />
             <label asp-for="Password"></label>
         </div>
+        <div class="form-check mb-4">
+            <input asp-for="RememberMe" class="form-check-input" />
+            <label asp-for="RememberMe" class="form-check-label">Keep me signed in</label>
+        </div>
         <button class="btn btn-primary" type="submit">Log In</button>
+        <div class="form-group d-flex flex-column gap-2 mt-2">
+            <a asp-action="ResetPassword" asp-controller="User">Forgot my password</a>
+            <a asp-action="Register" asp-controller="User">Don't have an account? Register here</a>
+        </div>
     </form>
 
 

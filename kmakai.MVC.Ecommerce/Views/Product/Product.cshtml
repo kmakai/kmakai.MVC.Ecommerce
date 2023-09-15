@@ -2,31 +2,71 @@
 
 @{
     ViewBag.Title = "Product";
+    List<Product> similarProducts = ViewBag.SimilarProducts;
 }
 
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-4">
-            <img src="@Model.ImageUrl" class="img-fluid" />
-        </div>
-        <div class="col-md-6">
-            <h1>@Model.Name</h1>
-            <p>@Model.Price</p>
-            <p>@Model.Category.Name</p>
-            <div class="row">
-                <div class="col-md-4">
+<div class="d-flex flex-column flex-md-row gap-3 p-2">
+    <div class="">
+        <img src="@Model.ImageUrl" class="" style="height: 300px" />
+    </div>
+    <div class="">
+        <h1>@Model.Name</h1>
+        <p> Price: <span class="text-success">$@Model.Price</span> </p>
+        <p>In: @Model.Category.Name </p>
+        <div class="">
+            <div class="">
+                <form class="add-product-form">
+                    <input type="hidden" name="productId" value="@Model.ProductId" />
+                    <input type="hidden" name="productName" value="@Model.Name" />
+                    <input type="hidden" name="productPrice" value="@Model.Price" />
+                    <input type="hidden" name="productImageUrl" value="@Model.ImageUrl" />
+                    <button type="submit" class="btn btn-success">Add to cart</button>
+                </form>
 
-                    <form class="add-product-form">
-                        <input type="hidden" name="productId" value="@Model.ProductId" />
-                        <input type="hidden" name="productName" value="@Model.Name" />
-                        <input type="hidden" name="productPrice" value="@Model.Price" />
-                        <input type="hidden" name="productImageUrl" value="@Model.ImageUrl" />
-                        <button type="submit" class="btn btn-success">Add to cart</button>
-                    </form>
+            </div>
+        </div>
+    </div>
+</div>
+<p class="mt-4 p-2">@Model.Description</p>
+
+<div class="row p-2">
+    <h4 class="">Products in @Model.Category.Name</h4>
+    
+    <div class="all-products">
+        @foreach (var product in similarProducts)
+        {
+            <div class="product-card border border-3">
+                <img src="@product.ImageUrl" alt="" class="card-img product-img" />
+                <div class="product-card-info">
+                    <span class="card-title">
+                        <a asp-action="product" asp-controller="product" asp-route-id="@product.ProductId">
+                            @product.Name
+                        </a>
+                    </span>
+                    <div class="price-rating d-flex">
+                        <span class="">
+                            $@product.Price
+                        </span>
+                        <span class="ms-auto">
+                            @product.Rating
+
+                            <i class="bi bi-star-fill star"></i>
+                        </span>
+                    </div>
+                    <div class="mt-auto">
+                        <form class="add-product-form">
+                            <input type="hidden" name="productId" value="@product.ProductId" />
+                            <input type="hidden" name="productName" value="@product.Name" />
+                            <input type="hidden" name="productPrice" value="@product.Price" />
+                            <input type="hidden" name="productImageUrl" value="@product.ImageUrl" />
+                            <button type="submit" class="btn btn-success">Add to cart</button>
+                        </form>
+                    </div>
+
 
                 </div>
             </div>
-        </div>
-        <p>@Model.Description</p>
+        }
     </div>
+</div>

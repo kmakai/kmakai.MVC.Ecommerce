@@ -22,10 +22,10 @@ public class UserController : Controller
         return View();
     }
 
-    public ViewResult Create() => View();
+    public ViewResult Register() => View();
 
     [HttpPost]
-    public async Task<IActionResult> Create(RegistrationModel model)
+    public async Task<IActionResult> Register(RegistrationModel model)
     {
         if (ModelState.IsValid)
         {
@@ -78,7 +78,7 @@ public class UserController : Controller
             if (appUser != null)
             {
                 await _signInManager.SignOutAsync();
-                Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(appUser, login.Password, false, false);
+                Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(appUser, login.Password, login.RememberMe, false);
                 if (result.Succeeded)
                     return Redirect(login.ReturnUrl ?? "/");
             }

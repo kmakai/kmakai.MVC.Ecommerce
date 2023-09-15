@@ -25,12 +25,18 @@ public class ProductController : Controller
             return NotFound();
         }
 
+        var similarProducts = await _productRepository.GetProductsAsync();
+        similarProducts = similarProducts.Where(p => p.Category.CategoryId == product.Category.CategoryId && p.ProductId != product.ProductId);
+        Console.WriteLine(similarProducts.Count());
+
+        ViewBag.SimilarProducts = similarProducts.ToList();
+
 
         return View(product);
     }
 
     [Route("products/search")]
-    public async Task<IActionResult> Search([FromQuery]string searchValue, [FromQuery] int searchCategory)
+    public async Task<IActionResult> Search([FromQuery] string searchValue, [FromQuery] int searchCategory)
     {
         Console.WriteLine(searchCategory);
         if (string.IsNullOrEmpty(searchValue))
@@ -42,11 +48,11 @@ public class ProductController : Controller
         products = products.Where(p => p.Name.ToLower().Contains(searchValue.ToLower()));
         Console.WriteLine(products.Count());
 
-        if(searchCategory != 0)
+        if (searchCategory != 0)
         {
             products = products.Where(p => p.Category.CategoryId == searchCategory);
         }
 
-       return Json(products);
+        return Json(products);
     }
 }
