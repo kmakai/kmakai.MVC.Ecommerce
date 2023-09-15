@@ -7,10 +7,26 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-4">
+            <img src="@Model.ImageUrl" class="img-fluid" />
+        </div>
+        <div class="col-md-6">
             <h1>@Model.Name</h1>
-            <p>@Model.Description</p>
             <p>@Model.Price</p>
             <p>@Model.Category.Name</p>
+            <div class="row">
+                <div class="col-md-4">
+
+                    <form class="add-product-form">
+                        <input type="hidden" name="productId" value="@Model.ProductId" />
+                        <input type="hidden" name="productName" value="@Model.Name" />
+                        <input type="hidden" name="productPrice" value="@Model.Price" />
+                        <input type="hidden" name="productImageUrl" value="@Model.ImageUrl" />
+                        <button type="submit" class="btn btn-success">Add to cart</button>
+                    </form>
+
+                </div>
+            </div>
         </div>
+        <p>@Model.Description</p>
     </div>

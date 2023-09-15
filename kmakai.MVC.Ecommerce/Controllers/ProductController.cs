@@ -28,4 +28,25 @@ public class ProductController : Controller
 
         return View(product);
     }
+
+    [Route("products/search")]
+    public async Task<IActionResult> Search([FromQuery]string searchValue, [FromQuery] int searchCategory)
+    {
+        Console.WriteLine(searchCategory);
+        if (string.IsNullOrEmpty(searchValue))
+        {
+            return BadRequest();
+        }
+
+        var products = await _productRepository.GetProductsAsync();
+        products = products.Where(p => p.Name.ToLower().Contains(searchValue.ToLower()));
+        Console.WriteLine(products.Count());
+
+        if(searchCategory != 0)
+        {
+            products = products.Where(p => p.Category.CategoryId == searchCategory);
+        }
+
+       return Json(products);
+    }
 }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using kmakai.MVC.Ecommerce.Repositories;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace kmakai.MVC.Ecommerce.Controllers;
 
@@ -34,6 +35,7 @@ public class OrderController : Controller
         return Json(createdOrder);
     }
 
+    [Authorize]
     [Route("order/checkout")]
     [HttpGet]
     public IActionResult CheckoutOrder()

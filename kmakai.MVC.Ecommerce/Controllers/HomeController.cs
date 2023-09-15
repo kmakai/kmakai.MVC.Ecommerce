@@ -10,15 +10,18 @@ namespace kmakai.MVC.Ecommerce.Controllers
     public class HomeController : Controller
     {
         private readonly IProductRepository _productRepository;
-        public HomeController(IProductRepository productRepo)
+        private readonly ICategoryRepository _categoryRepository;
+        public HomeController(IProductRepository productRepo, ICategoryRepository categoryRepo)
         {
             _productRepository = productRepo;
+            _categoryRepository = categoryRepo;
         }
 
         public async Task<IActionResult> Index()
         {
             var products = await _productRepository.GetProductsAsync();
-            products = products.Where(p => p.Rating > 4.5);
+            //products = products.Where(p => p.Rating > 4.5);
+            ViewBag.Categories = await _categoryRepository.GetCategoriesAsync();
            
             return View(products);
         }

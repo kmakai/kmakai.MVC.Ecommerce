@@ -53,8 +53,12 @@ public class UserController : Controller
         return View(model);
     }
 
-    public ViewResult Login(string returnUrl)
+    public ViewResult Login(string? returnUrl)
     {
+        if (string.IsNullOrEmpty(returnUrl))
+        {
+            returnUrl = "/";
+        }
         var login = new LoginModel
         {
             ReturnUrl = returnUrl
