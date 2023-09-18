@@ -38,7 +38,6 @@ public class ProductController : Controller
     [Route("products/search")]
     public async Task<IActionResult> Search([FromQuery] string searchValue, [FromQuery] int searchCategory)
     {
-        Console.WriteLine(searchCategory);
         if (string.IsNullOrEmpty(searchValue))
         {
             return BadRequest();
@@ -46,7 +45,6 @@ public class ProductController : Controller
 
         var products = await _productRepository.GetProductsAsync();
         products = products.Where(p => p.Name.ToLower().Contains(searchValue.ToLower()));
-        Console.WriteLine(products.Count());
 
         if (searchCategory != 0)
         {

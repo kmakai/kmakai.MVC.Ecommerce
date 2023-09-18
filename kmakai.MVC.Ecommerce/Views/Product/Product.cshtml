@@ -7,7 +7,7 @@
 
 
 <div class="d-flex flex-column flex-md-row gap-3 p-2">
-    <div class="">
+    <div class="shadow-sm p-2 rounded">
         <img src="@Model.ImageUrl" class="" style="height: 300px" />
     </div>
     <div class="">
@@ -23,7 +23,6 @@
                     <input type="hidden" name="productImageUrl" value="@Model.ImageUrl" />
                     <button type="submit" class="btn btn-success">Add to cart</button>
                 </form>
-
             </div>
         </div>
     </div>
@@ -32,7 +31,7 @@
 
 <div class="row p-2">
     <h4 class="">Products in @Model.Category.Name</h4>
-    
+
     <div class="all-products">
         @foreach (var product in similarProducts)
         {
